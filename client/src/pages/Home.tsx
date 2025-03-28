@@ -1,8 +1,8 @@
 import { useState, useEffect, useLayoutEffect } from "react";
-import { retrieveUsers } from "../api/userAPI";
+import { retrieveUsers } from "../api/breedAPI";
 import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
-import UserList from '../components/Users';
+import UserList from '../components/SearchBar';
 import auth from '../utils/auth';
 
 const Home = () => {
