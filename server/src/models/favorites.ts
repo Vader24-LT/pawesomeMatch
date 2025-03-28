@@ -14,8 +14,6 @@ export class Favorite extends Model<FavoriteAttributes, FavoriteCreationAttribut
   public userId!: number;
   public breedId!: number;  
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
 }
 
 export function FavoriteFactory(sequelize: Sequelize): typeof Favorite {

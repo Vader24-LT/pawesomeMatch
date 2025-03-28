@@ -22,9 +22,6 @@ export class Breed extends Model<BreedAttributes, BreedCreationAttributes>
   public hypoallergenic!: boolean;
   public image_url!: string;
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-
   public getTemperamentList(): string[] {
     return this.temperament.split(',').map(t => t.trim());
   }
