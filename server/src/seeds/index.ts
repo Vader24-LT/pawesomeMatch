@@ -1,19 +1,45 @@
-import { seedUsers } from './user-seeds.js';
-import sequelize from '../config/connection.js';
+import { seedUsers } from "./user";
+import { seedBreeds } from "./breeds";
+import sequelize from "../config/connection";
 
-const seedAll = async (): Promise<void> => {
+const seedDatabase = async () => {
   try {
-    await sequelize.sync({ force: true });
-    console.log('\n----- DATABASE SYNCED -----\n');
-    
+    await sequelize.sync({ force: true }); // Drops and recreates tables
+    console.log("Database synced!");
+
     await seedUsers();
-    console.log('\n----- USERS SEEDED -----\n');
-    
+    console.log("Users seeded!");
+
+    await seedBreeds();
+    console.log("Breeds seeded!");
+
+    console.log("✅ Seeding completed!");
     process.exit(0);
   } catch (error) {
-    console.error('Error seeding database:', error);
+    console.error("❌ Error seeding database:", error);
     process.exit(1);
   }
 };
 
-seedAll();
+seedDatabase();
+
+
+// import { seedUsers } from './user-seeds.js';
+// import sequelize from '../config/connection.js';
+
+// const seedAll = async (): Promise<void> => {
+//   try {
+//     await sequelize.sync({ force: true });
+//     console.log('\n----- DATABASE SYNCED -----\n');
+    
+//     await seedUsers();
+//     console.log('\n----- USERS SEEDED -----\n');
+    
+//     process.exit(0);
+//   } catch (error) {
+//     console.error('Error seeding database:', error);
+//     process.exit(1);
+//   }
+// };
+
+// seedAll();
