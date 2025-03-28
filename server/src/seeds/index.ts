@@ -1,5 +1,5 @@
 import { seedUsers } from "./user";
-import { seedBreeds } from "./breeds";
+import { seedBreeds } from "./breed";
 import sequelize from "../config/connection";
 
 const seedDatabase = async () => {
