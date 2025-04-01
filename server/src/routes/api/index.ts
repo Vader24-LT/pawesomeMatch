@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { userRouter } from './user-routes.js';
+import BreedController from '../../controllers/BreedController';
 
 const router = Router();
 
-router.use('/users', userRouter);
+router.get('/breeds', BreedController.getAllBreeds);
 
 export default router;
