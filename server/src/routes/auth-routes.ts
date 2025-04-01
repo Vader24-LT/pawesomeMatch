@@ -7,6 +7,8 @@ import bcrypt from 'bcrypt';  // Import the bcrypt library for password hashing
 export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;  // Extract username and password from request body
 
+  console.log('Test: ',username,password,req, res);
+  
   // Find the user in the database by username
   const user = await User.findOne({
     where: { username },
