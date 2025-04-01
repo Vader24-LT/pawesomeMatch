@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import sequelize from '../config/connection';
+import { sequelize } from '../models/index';
 
 interface BreedAttributes {
   id: number;

@@ -1,8 +1,7 @@
 import { Sequelize } from 'sequelize';
-import sequelize from '../config/connection.js';
-import { User, UserFactory } from './user.js';
-import { Breed, BreedFactory } from './breed.js';
-import { Favorite, FavoriteFactory } from './favorites.js';
+import { User, UserFactory } from './user';
+import Breed from './breed';
+import { Favorite, FavoriteFactory } from './favorites';
 
 interface Models {
   User: typeof User;
@@ -11,18 +10,49 @@ interface Models {
   sequelize: Sequelize;
 }
 
+const sequelize = process.env.DB_URL
+  ? new Sequelize(process.env.DB_URL)
+  : new Sequelize(
+      process.env.DB_NAME || '',
+      process.env.DB_USER || '',
+      process.env.DB_PASSWORD,
+      {
+        host: 'localhost',
+        dialect: 'postgres',
+        dialectOptions: {
+          decimalNumbers: true,
+        },
+      }
+    );
+
 // Initialize models
 const UserModel = UserFactory(sequelize);
-const BreedModel = BreedFactory(sequelize);
+const BreedModel = Breed;
 const FavoriteModel = FavoriteFactory(sequelize);
 
 // Setup associations
 function setupAssociations() {
-// After initializing all models
-User.hasMany(Favorite, { foreignKey: 'userId' });
-Favorite.belongsTo(User, { foreignKey: 'userId' });
-Favorite.belongsTo(Breed, { foreignKey: 'breedId' });
-Breed.hasMany(Favorite, { foreignKey: 'breedId' });
+  // User-Favorite (1:M)
+  UserModel.hasMany(FavoriteModel, {
+    foreignKey: 'userId',
+    as: 'favorites'
+  });
+
+  // Breed-Favorite (1:M)
+  BreedModel.hasMany(FavoriteModel, {
+    foreignKey: 'breedId',  // Changed from dogId to breedId
+    as: 'favorites'
+  });
+
+  FavoriteModel.belongsTo(UserModel, {
+    foreignKey: 'userId',
+    as: 'user'
+  });
+
+  FavoriteModel.belongsTo(BreedModel, {
+    foreignKey: 'breedId',  // Changed from dogId to breedId
+    as: 'breed'
+  });
 }
 
 setupAssociations();
@@ -47,4 +77,4 @@ const models: Models = {
   sequelize
 };
 
-export default models;
+export {models,sequelize};

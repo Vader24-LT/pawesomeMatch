@@ -1,6 +1,6 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import models from '../../models/index.js';
+import {models} from '../../models/index';
 const { User } = models;
 
 

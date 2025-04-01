@@ -1,4 +1,4 @@
-import {Breed} from "../models/breed";
+import Breed from "../models/breed";
 
 
 export const seedBreeds = async () => {

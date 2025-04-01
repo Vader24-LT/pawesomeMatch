@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import Breed from '../models/breed';
+import Breed from '../models/breed.js';
 
-export default class BreedController {
+
   /**
    * Get all breeds (GET /api/breeds)
    */
-  static async getAllBreeds(_req: Request, res: Response): Promise<Response> {
+   export const getAllBreeds = async(req: Request, res: Response): Promise<Response> =>{
     try {
       const breeds = await Breed.findAll();
       return res.json(breeds);
@@ -21,7 +21,7 @@ export default class BreedController {
   /**
    * Get single breed by ID (GET /api/breeds/:id)
    */
-  static async getBreedById(req: Request, res: Response): Promise<Response> {
+  export const getBreedById = async(req: Request, res: Response): Promise<Response> =>{
     try {
       const breed = await Breed.findByPk(req.params.id);
       if (!breed) {
@@ -40,7 +40,7 @@ export default class BreedController {
   /**
    * Create new breed (POST /api/breeds)
    */
-  static async createBreed(req: Request, res: Response): Promise<Response> {
+  export const createBreed = async(req: Request, res: Response): Promise<Response> =>{
     try {
       const breed = await Breed.create(req.body);
       return res.status(201).json(breed);
@@ -52,4 +52,3 @@ export default class BreedController {
       });
     }
   }
-}

@@ -1,11 +1,12 @@
+import { sequelize } from './models/index';
+
 const forceDatabaseRefresh = false;
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import sequelize from './config/connection.js';
-import routes from './routes/index.js';
+import routes from './routes/index';
 
 const app = express();
 const PORT = process.env.PORT || 3001;

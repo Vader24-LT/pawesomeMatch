@@ -1,4 +1,4 @@
-import models from "../models/index.js";
+import { models } from "../models/index";
 const { User } = models;
 
 export const seedUsers = async () => {
