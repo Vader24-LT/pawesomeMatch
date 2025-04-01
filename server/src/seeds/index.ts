@@ -20,7 +20,7 @@ const sequelize = process.env.DB_URL
 
 import { seedUsers } from './user.js';
 import { seedBreeds } from "./Breed";
-// import sequelize from '../config/connection.js';
+import sequelize from '../config/connection.js';
 
 
 const seedDatabase = async () => {
