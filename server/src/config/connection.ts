@@ -1,6 +1,9 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+console.log('test: ',process.env.DB_USER);
+
+
 import { Sequelize } from 'sequelize';
 console.log('this is the password',process.env.DB_PASSWORD)
 console.log('this should be the whole', process.env)
