@@ -1,6 +1,5 @@
 import {Breed} from "../models/breed";
 
-
 export const seedBreeds = async () => {
   await Breed.bulkCreate([
     {
