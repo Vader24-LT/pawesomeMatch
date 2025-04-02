@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import Breed from '../models/breed';
+import {Breed} from '../models/breed.js';
 
-export default class BreedController {
+export class BreedController {
   /**
    * Get all breeds (GET /api/breeds)
    */

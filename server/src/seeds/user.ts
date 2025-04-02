@@ -1,5 +1,5 @@
-import models from "../models/index.js";
-const { User } = models;
+import {User} from "../models/index.js";
+
 
 export const seedUsers = async () => {
   await User.bulkCreate([

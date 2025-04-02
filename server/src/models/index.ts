@@ -1,20 +1,13 @@
-import { Sequelize } from 'sequelize';
 import sequelize from '../config/connection.js';
-import { User, UserFactory } from './user.js';
-import { Breed, BreedFactory } from './breed.js';
-import { Favorite, FavoriteFactory } from './favorites.js';
+import { UserFactory } from './user.js';
+import { BreedFactory } from './breed.js';
+import { FavoriteFactory } from './favorites.js';
 
-interface Models {
-  User: typeof User;
-  Breed: typeof Breed;
-  Favorite: typeof Favorite;
-  sequelize: Sequelize;
-}
 
 // Initialize models
-const UserModel = UserFactory(sequelize);
-const BreedModel = BreedFactory(sequelize);
-const FavoriteModel = FavoriteFactory(sequelize);
+const User = UserFactory(sequelize);
+const Breed = BreedFactory(sequelize);
+const Favorite = FavoriteFactory(sequelize);
 
 // Setup associations
 function setupAssociations() {
@@ -40,11 +33,6 @@ async function testConnection() {
 
 testConnection();
 
-const models: Models = {
-  User: UserModel,
-  Breed: BreedModel,
-  Favorite: FavoriteModel,
-  sequelize
-};
 
-export default models;
+
+export{User, sequelize, Favorite, Breed}
