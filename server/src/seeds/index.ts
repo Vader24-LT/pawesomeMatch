@@ -1,7 +1,6 @@
-
-import { seedUsers } from './user';
-import { seedBreeds } from "./Breed";
-import { sequelize } from '../models/index';
+import { seedUsers } from './user.js';
+import { seedBreeds } from "./Breed.js";
+import sequelize from '../config/connection.js';
 
 
 const seedDatabase = async () => {

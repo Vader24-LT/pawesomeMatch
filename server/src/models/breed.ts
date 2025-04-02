@@ -12,9 +12,9 @@ interface BreedAttributes {
   image_url: string | null;
 }
 
-interface BreedCreationAttributes extends Optional<BreedAttributes, 'id'> {}
+interface BreedCreationAttributes extends Optional<BreedAttributes, 'id'> { }
 
-export class Breed extends Model<BreedAttributes, BreedCreationAttributes> 
+export class Breed extends Model<BreedAttributes, BreedCreationAttributes>
   implements BreedAttributes {
   public id!: number;
   public name!: string;
@@ -28,52 +28,56 @@ export class Breed extends Model<BreedAttributes, BreedCreationAttributes>
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
-export function BreedFactory(sequelize: Sequelize): typeof Breed {
-Breed.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    fun_fact: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    temperament: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    size: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    life_span: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    hypoallergenic: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
-    image_url: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
-  },
-  {
-    sequelize,
-    modelName: 'Breed',
-    tableName: 'breeds',
-    timestamps: true,
-    underscored: true // Optional: if you prefer snake_case columns
-  }
-);
 
-return Breed;}
+export function BreedFactory(sequelize: Sequelize): typeof Breed {
+
+  Breed.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+      fun_fact: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      temperament: {
+        type: DataTypes.TEXT,
+        allowNull: false
+      },
+      size: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      life_span: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      hypoallergenic: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
+      image_url: {
+        type: DataTypes.STRING,
+        allowNull: true
+      }
+    },
+    {
+      sequelize,
+      modelName: 'Breed',
+      tableName: 'breeds',
+      timestamps: true,
+      underscored: true // Optional: if you prefer snake_case columns
+    }
+  );
+
+  return Breed;
+};
+

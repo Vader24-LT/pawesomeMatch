@@ -1,4 +1,4 @@
-import { UserModel as User } from "../models/index";
+import {User} from "../models/index.js";
 
 
 export const seedUsers = async () => {

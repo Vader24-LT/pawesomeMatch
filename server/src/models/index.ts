@@ -1,50 +1,34 @@
-import { Sequelize } from 'sequelize';
-import { User, UserFactory } from './user.js';
+import sequelize from '../config/connection.js';
+import { UserFactory } from './user.js';
 import { BreedFactory } from './breed.js';
-import { Favorite, FavoriteFactory } from './favorites.js';
-import dotenv from 'dotenv';
-dotenv.config();
+import { FavoriteFactory } from './favorites.js';
 
-const sequelize = process.env.DB_URL
-  ? new Sequelize(process.env.DB_URL)
-  : new Sequelize(
-      process.env.DB_NAME || '',
-      process.env.DB_USER || '',
-      process.env.DB_PASSWORD,
-      {
-        host: 'localhost',
-        dialect: 'postgres',
-        dialectOptions: {
-          decimalNumbers: true,
-        },
-      }
-    );
 
 // Initialize models
-const UserModel = UserFactory(sequelize);
-const BreedModel = BreedFactory(sequelize);
-const FavoriteModel = FavoriteFactory(sequelize);
+const User = UserFactory(sequelize);
+const Breed = BreedFactory(sequelize);
+const Favorite = FavoriteFactory(sequelize);
 
 // Setup associations
 function setupAssociations() {
   // User-Favorite (1:M)
-  UserModel.hasMany(FavoriteModel, {
+  User.hasMany(Favorite, {
     foreignKey: 'userId',
     as: 'favorites'
   });
 
   // Breed-Favorite (1:M)
-  BreedModel.hasMany(FavoriteModel, {
+  Breed.hasMany(Favorite, {
     foreignKey: 'breedId',  // Changed from dogId to breedId
     as: 'favorites'
   });
 
-  FavoriteModel.belongsTo(UserModel, {
+  Favorite.belongsTo(User, {
     foreignKey: 'userId',
     as: 'user'
   });
 
-  FavoriteModel.belongsTo(BreedModel, {
+  Favorite.belongsTo(Breed, {
     foreignKey: 'breedId',  // Changed from dogId to breedId
     as: 'breed'
   });
@@ -65,4 +49,4 @@ async function testConnection() {
 
 testConnection();
 
-export {sequelize, UserModel, BreedModel, FavoriteModel};
+export {sequelize, User, Breed, Favorite};

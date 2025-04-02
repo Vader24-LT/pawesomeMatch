@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { Breed } from '../models/breed.js';
+import {Breed} from '../models/breed.js';
 
-
+ 
   /**
    * Get all breeds (GET /api/breeds)
    */
-   export const getAllBreeds = async(req: Request, res: Response): Promise<Response> =>{
+   const getAllBreeds = async(req: Request, res: Response): Promise<Response> =>{
     try {
       const breeds = await Breed.findAll();
       return res.json(breeds);
@@ -21,7 +21,7 @@ import { Breed } from '../models/breed.js';
   /**
    * Get single breed by ID (GET /api/breeds/:id)
    */
-  export const getBreedById = async(req: Request, res: Response): Promise<Response> =>{
+   const getBreedById = async(req: Request, res: Response): Promise<Response> =>{
     try {
       const breed = await Breed.findByPk(req.params.id);
       if (!breed) {
@@ -40,7 +40,7 @@ import { Breed } from '../models/breed.js';
   /**
    * Create new breed (POST /api/breeds)
    */
-  export const createBreed = async(req: Request, res: Response): Promise<Response> =>{
+  const createBreed = async(req: Request, res: Response): Promise<Response> =>{
     try {
       const breed = await Breed.create(req.body);
       return res.status(201).json(breed);
@@ -52,3 +52,5 @@ import { Breed } from '../models/breed.js';
       });
     }
   }
+
+  export { getAllBreeds, getBreedById, createBreed };
