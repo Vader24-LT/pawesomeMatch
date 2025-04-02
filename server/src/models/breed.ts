@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional, Sequelize } from 'sequelize';
-
+import { sequelize } from '../models/index.js';
 
 interface BreedAttributes {
   id: number;

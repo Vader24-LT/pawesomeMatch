@@ -11,11 +11,27 @@ const Favorite = FavoriteFactory(sequelize);
 
 // Setup associations
 function setupAssociations() {
-// After initializing all models
-User.hasMany(Favorite, { foreignKey: 'userId' });
-Favorite.belongsTo(User, { foreignKey: 'userId' });
-Favorite.belongsTo(Breed, { foreignKey: 'breedId' });
-Breed.hasMany(Favorite, { foreignKey: 'breedId' });
+  // User-Favorite (1:M)
+  User.hasMany(Favorite, {
+    foreignKey: 'userId',
+    as: 'favorites'
+  });
+
+  // Breed-Favorite (1:M)
+  Breed.hasMany(Favorite, {
+    foreignKey: 'breedId',  // Changed from dogId to breedId
+    as: 'favorites'
+  });
+
+  Favorite.belongsTo(User, {
+    foreignKey: 'userId',
+    as: 'user'
+  });
+
+  Favorite.belongsTo(Breed, {
+    foreignKey: 'breedId',  // Changed from dogId to breedId
+    as: 'breed'
+  });
 }
 
 setupAssociations();
@@ -33,6 +49,4 @@ async function testConnection() {
 
 testConnection();
 
-
-
-export{User, sequelize, Favorite, Breed}
+export {sequelize, User, Breed, Favorite};

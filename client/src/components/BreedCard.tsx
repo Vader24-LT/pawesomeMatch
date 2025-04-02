@@ -1,4 +1,3 @@
-// client/src/components/BreedCard.tsx
 import { Link } from 'react-router-dom'; // Now properly used
 import { Breed } from '../interfaces/Breed';
 import './BreedCard.css'; // Import styles
