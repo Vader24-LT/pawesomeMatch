@@ -1,14 +1,9 @@
 import { Sequelize } from 'sequelize';
-import { User, UserFactory } from './user';
-import Breed from './breed';
-import { Favorite, FavoriteFactory } from './favorites';
-
-interface Models {
-  User: typeof User;
-  Breed: typeof Breed;
-  Favorite: typeof Favorite;
-  sequelize: Sequelize;
-}
+import { User, UserFactory } from './user.js';
+import { BreedFactory } from './breed.js';
+import { Favorite, FavoriteFactory } from './favorites.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
@@ -27,7 +22,7 @@ const sequelize = process.env.DB_URL
 
 // Initialize models
 const UserModel = UserFactory(sequelize);
-const BreedModel = Breed;
+const BreedModel = BreedFactory(sequelize);
 const FavoriteModel = FavoriteFactory(sequelize);
 
 // Setup associations
@@ -70,11 +65,4 @@ async function testConnection() {
 
 testConnection();
 
-const models: Models = {
-  User: UserModel,
-  Breed: BreedModel,
-  Favorite: FavoriteModel,
-  sequelize
-};
-
-export {models,sequelize};
+export {sequelize, UserModel, BreedModel, FavoriteModel};

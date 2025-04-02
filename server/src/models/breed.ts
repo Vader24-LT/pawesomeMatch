@@ -1,5 +1,5 @@
-import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../models/index';
+import { Model, DataTypes, Optional, Sequelize } from 'sequelize';
+import { sequelize } from '../models/index.js';
 
 interface BreedAttributes {
   id: number;
@@ -14,7 +14,7 @@ interface BreedAttributes {
 
 interface BreedCreationAttributes extends Optional<BreedAttributes, 'id'> {}
 
-class Breed extends Model<BreedAttributes, BreedCreationAttributes> 
+export class Breed extends Model<BreedAttributes, BreedCreationAttributes> 
   implements BreedAttributes {
   public id!: number;
   public name!: string;
@@ -28,7 +28,7 @@ class Breed extends Model<BreedAttributes, BreedCreationAttributes>
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
-
+export function BreedFactory(sequelize: Sequelize): typeof Breed {
 Breed.init(
   {
     id: {
@@ -76,4 +76,4 @@ Breed.init(
   }
 );
 
-export default Breed;
+return Breed;}

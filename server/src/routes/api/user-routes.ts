@@ -1,7 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import {models} from '../../models/index';
-const { User } = models;
+import {UserModel as User} from '../../models/index';
+
 
 
 const router = express.Router();
