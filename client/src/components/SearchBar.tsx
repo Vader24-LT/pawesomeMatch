@@ -13,7 +13,7 @@ interface SearchBarProps {
     searchTerm: string;
     onSearchChange: (term: string) => void;
   }
-  
+}
   export default function SearchBar({ searchTerm, onSearchChange }: SearchBarProps) {
     return (
       <div className="search-bar">

@@ -1,5 +1,5 @@
 import { seedUsers } from './user.js';
-import { seedBreeds } from "./Breed";
+import { seedBreeds } from "./Breed.js";
 import sequelize from '../config/connection.js';
 
 
