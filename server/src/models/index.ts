@@ -19,7 +19,7 @@ function setupAssociations() {
 
   // Breed-Favorite (1:M)
   Breed.hasMany(Favorite, {
-    foreignKey: 'breedId',  // Changed from dogId to breedId
+    foreignKey: 'breedId', 
     as: 'favorites'
   });
 
@@ -29,7 +29,7 @@ function setupAssociations() {
   });
 
   Favorite.belongsTo(Breed, {
-    foreignKey: 'breedId',  // Changed from dogId to breedId
+    foreignKey: 'breedId',  
     as: 'breed'
   });
 }
