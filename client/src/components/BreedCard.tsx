@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'; // Now properly used
+import { Link } from 'react-router-dom'; 
 import { Breed } from '../interfaces/Breed';
-import './BreedCard.css'; // Import styles
+import './BreedCard.css'; 
 
 interface BreedCardProps {
   breed: Breed;

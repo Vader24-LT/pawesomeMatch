@@ -74,7 +74,7 @@ export function BreedFactory(sequelize: Sequelize): typeof Breed {
       modelName: 'Breed',
       tableName: 'breeds',
       timestamps: true,
-      underscored: true // Optional: if you prefer snake_case columns
+      underscored: true
     }
   );
 
