@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Breed } from '../interfaces/Breed';
 import SearchBar from '../components/SearchBar';
-import UserProfile from '../components/UserProfile';
+// import UserProfile from '../components/UserProfile';
 import BreedCard from '../components/BreedCard';
 import './Home.css';
 
@@ -23,7 +23,7 @@ const categories = [
 export default function Home() {
   const [allBreeds, setAllBreeds] = useState<Breed[]>([]);
   const [filteredBreeds, setFilteredBreeds] = useState<Breed[]>([]);
-  const [favorites, setFavorites] = useState<Breed[]>([]);
+ // const [favorites, setFavorites] = useState<Breed[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,26 +31,31 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [breedsResponse, favoritesResponse] = await Promise.all([
-          fetch('/api/breeds'),
-          fetch('/api/favorites', {
-            headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-          })
-        ]);
+        const [breedsResponse] = await Promise.all([
+          fetch('/api/breeds', {
+            headers: {    
+             'Authorization': `Bearer ${localStorage.getItem('id_token')}`
+            } 
+      }),
+      //     //fetch('/api/favorites', {
+      //       headers: {
+      //         'Authorization': `Bearer ${localStorage.getItem('id_token')}`
+      //      }
+      //     })
+      //   ]);
+    ])
 
         if (!breedsResponse.ok) throw new Error('Failed to fetch breeds');
-        if (!favoritesResponse.ok) throw new Error('Failed to fetch favorites');
+        //if (!favoritesResponse.ok) throw new Error('Failed to fetch favorites');
 
-        const [breedsData, favoritesData] = await Promise.all([
+        const [breedsData] = await Promise.all([
           breedsResponse.json(),
-          favoritesResponse.json()
+         // favoritesResponse.json()
         ]);
 
         setAllBreeds(breedsData);
         setFilteredBreeds(breedsData);
-        setFavorites(favoritesData);
+      //  setFavorites(favoritesData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
@@ -64,7 +69,11 @@ export default function Home() {
   useEffect(() => {
     const fetchBreeds = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/breeds');
+        const response = await fetch('/api/breeds', {
+          headers: {    
+           'Authorization': `Bearer ${localStorage.getItem('id_token')}`
+          } 
+    });
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -114,7 +123,7 @@ export default function Home() {
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
           />
-          <UserProfile favorites={favorites} />
+          {/* <UserProfile favorites={favorites} /> */}
         </div>
       </header>
 

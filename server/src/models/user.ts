@@ -25,6 +25,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   // Method to hash and set the password for the user
   public async setPassword(password: string) {
     const saltRounds = 10;
+    console.log (password, saltRounds);
     this.password = await bcrypt.hash(password, saltRounds);
   }
 }
@@ -57,7 +58,8 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       hooks: {
         // Before creating a new user, hash and set the password
         beforeCreate: async (user: User) => {
-          await user.setPassword(user.password);
+          console.log (user.dataValues)
+          await user.setPassword(user.dataValues.password);
         },
         // Before updating a user, hash and set the new password if it has changed
         beforeUpdate: async (user: User) => {
